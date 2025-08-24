@@ -1,3 +1,0 @@
-conda activate numsynth
-
-python numsynth/popper.py my-experiments/numeric-zendo1 --numerical-reasoning
