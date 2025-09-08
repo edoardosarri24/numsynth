@@ -1,0 +1,1 @@
+- direzione dei predicati

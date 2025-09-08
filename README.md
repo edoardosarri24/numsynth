@@ -8,8 +8,8 @@
     ```bash
     conda env create -f environment.yml
     ```
-### running
 
+### running
 To run experiments with your own data, create a new folder in the `my-experiments` directory containing your `bias.pl`, `bk.pl` and `exs.pl` files. Then you must execute the commands below.
 ```bash
 conda activate numsynth

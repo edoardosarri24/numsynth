@@ -1,0 +1,2 @@
+- script da log a file bk.pl.
+- usare generare più tracce anche con negativi.
