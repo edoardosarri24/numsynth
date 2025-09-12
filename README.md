@@ -10,8 +10,11 @@
     ```
 
 ### running
-To run experiments with your own data, create a new folder in the `my-experiments` directory containing your `bias.pl`, `bk.pl` and `exs.pl` files. Then you must execute the commands below.
+To run experiments with your own data, create a new folder in the `my-experiments` directory containing your `bias.pl` file and your `script.py` (you can start from my one). Then you must execute the commands below.
 ```bash
 conda activate numsynth
-python numsynth/popper.py my-experiments/<name-folder> --numerical-reasoning
+./numsynth.sh <folder-name>
 ```
+
+### Experiments
+My experiments and the datail of my studies are in my [report.pdf](https://github.com/edoardosarri24/numsynth/blob/main/report.pdf) file.

@@ -1,0 +1,49 @@
+bk.pl sucessfully generated!!!
+exs.pl sucessfully generated!!!
+/Users/edoardosarri/Documents/numsynth/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+22:03:30 Num. pos examples: 763
+22:03:30 Num. neg examples: 237
+22:03:30 Searching programs of size: 3
+22:03:31 ********************
+22:03:31 New best hypothesis:
+22:03:31 tp:1 fn:762 size:3
+22:03:31 failure(A):- release(A,B,C),complete(A,B,C).
+22:03:31 ********************
+22:03:32 Searching programs of size: 4
+22:05:31 ********************
+22:05:31 New best hypothesis:
+22:05:31 tp:27 fn:736 size:87
+22:05:31 failure(A):- release(A,B,C),complete(A,B,C).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,40,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,8,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,25,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,26,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,44,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,33,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,71,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,86,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,95,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,50,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,9,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,83,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,47,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,62,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,10,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,68,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,89,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,14,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,20,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,29,E),finish(A,E,B,D).
+22:05:31 failure(A):- execute(A,F,B,D),mult(F,6,E),finish(A,E,B,D).
+22:05:31 ********************
+22:07:03 ********************
+22:07:03 New best hypothesis:
+22:07:03 tp:763 fn:0 size:4
+22:07:03 failure(A):- mult(E,96,F),execute(A,F,B,D),finish(A,E,B,D).
+22:07:03 ********************
+********** SOLUTION **********
+Precision:1.00 Recall:1.00 TP:763 FN:0 TN:237 FP:0 Size:4
+failure(A):- finish(A,E,B,D),execute(A,F,B,D),mult(E,96,F).
+******************************
+execution time: 3m32.495s

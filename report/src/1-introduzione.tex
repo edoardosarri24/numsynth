@@ -1,0 +1,32 @@
+\chapter{Introduzione}
+Questo progetto è stato svolto durante la laurea magistrale in Ingegneria Informatica per il corso di Explainable Artificial Intelligence.
+
+L'idea di \textit{Prediction in Data-Driven System} nasce dalla situazione in cui all'interno di un'azienda abbiamo un sistema di cui non è noto il modello, ma abbiamo solo il file di log generati dai task che definiscono questo sistema. Se abbiamo la necessità di valutare quale task potrebbe portare a dei problemi in questa esecuzione del sistema, non possiamo eseguire un'analisi statica dei task, ma l'unica soluzione è analizzare i dati che questi hanno prodotto.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scenario}
+Nel nostro contesto specifico volevamo analizzare i dati prodotti da un sistema real-time, cioè un sistema i cui task devono dare garanzia di terminare entro una definita e nota deadline.
+
+Essendo in uno scenario simulato, come prima cosa ci è servito un generatore di dati che ci fornisse il dataset su cui applicare le nostre idee. Questo progetto è in qualche modo collegato a un altro svolto in precedenza che ci fornisce un simulatore per lo scheduling di task real-time. Tale simulatore, presenza in nella repo del mio GitHub \href{https://github.com/edoardosarri24/real-time-scheduling-simulator}{real-time-scheduling-simulator}, è in grado di generare un dataset di tracce dato un modello di taskset e un algoritmo di scheduling.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Framework}
+Il sistema utilizzato per eseguire il nostro studio è stato \href{https://github.com/celinehocquette/numsynth-aaai23}{Numsynth}.
+
+Si tratta di un'estensione di Popper che permette anche il ragionamento numerico. È stato deciso di utilizzare questo sistema per due motivi: essendo basato su Popper, ha dietro un sistema noto e solito; può eseguire valutazioni su valori numerici, cosa fondamentale visto che i file di log sono basati su tempi in cui accadono eventi; utilizza il Learning From Failure (LFE) che permette, nonostante la complessità del ragionamento numerico, di limitare lo spazio di ricerca della soluzione.
+
+\myskip
+
+Numsynth permette di specificare dei predicati che sono particolari e che ci potrebbero essere utili nel seguito:
+\begin{itemize}
+    \item \texttt{direction(predicato,(dir1,dir2,...))}: \\
+        Permette di specificare quali valori devono essere noti e quali saranno restituiti dal predicato. Le direzioni possibili sono: \textit{in} definisce che il valore deve essere noto; \textit{out} definsice che il valore sarà restituito dal predicato.
+    \item \texttt{max\_vars(n)}: \\
+        Definisce il vincolo sulla complessità delle regole, specificando il numero massimo di variabili che una regola può contenere.
+    \item \texttt{max\_body(n)}: \\
+        Definisce il vincolo sulla complessità delle regole, specificando il numero massimo di letterali che il corpo di una regola può avere.
+    \item \texttt{magic\_value\_type(type)}: \\
+        Definisce il tipo di valori che il sistema può inventare. Solitamente infatti i valori (anche quelli numerici) che compaiono nella soluzione sono solo quelli presenti nella background kwonledge.
+    \item \texttt{bounds(predicato,arg\_pos,(min, max))}: \\
+        Definsice i limiti in cui ricercare un valore numerico. Serve per diminuire lo spazio di ricerca e la complessità del training.
+\end{itemize}
