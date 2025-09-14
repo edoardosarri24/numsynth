@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-import os
-import argparse
 
 '''
 The script must be and run from the project directory.
@@ -31,13 +29,13 @@ def log_to_bk():
                 # handling end line
                 if 'end' in line:
                     bk_elements.append('')
-                    exs_elements.append(f'pos(failure({trace_id})).')
+                    exs_elements.append(f'pos(failure(trace{trace_id})).')
                     trace_id += 1
                     continue
                 # handling deadlineMiss line
                 if 'deadlineMiss' in line:
                     bk_elements.append('')
-                    exs_elements.append(f'neg(failure({trace_id})).')
+                    exs_elements.append(f'neg(failure(trace{trace_id})).')
                     trace_id += 1
                     continue
 
@@ -52,11 +50,11 @@ def log_to_bk():
                 firstChar = element[0]
                 if (firstChar == 'T'):
                     task_id = element[-1]
-                    bk_element = (f'{event}({trace_id}, {time}, {task_id}).')
+                    bk_element = (f'{event}(trace{trace_id}, {time}, task{task_id}).')
                 elif(firstChar == 'C'):
                     task_id = element[-3]
                     chunk_id = element[-1]
-                    bk_element = (f'{event}({trace_id}, {time}, {task_id}, {chunk_id}).')
+                    bk_element = (f'{event}(trace{trace_id}, {time}, task{task_id}, chunk{chunk_id}).')
                 else:
                     exit("Error: invalid element")
                 bk_elements.append(bk_element)

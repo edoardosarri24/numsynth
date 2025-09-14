@@ -1,14 +1,14 @@
 \chapter{Analisi}
 \label{cap:analisi}
-In qeusto capitolo analizzero il ragiornamento che ci ha portato all'implementazione dei nostri esperimenti.
+In questo capitolo analizzeremo il ragionamento che ci ha portato all'implementazione dei nostri esperimenti.
 
-In particolar modo ci concentraremo sulle decisioni che sono state prese riguardo al representation language. Una volta che abbiamo deciso come volgiamo che il sistema ci spieghi il fatto su cui facciamo inferenza, cioè definito lo spazio di ricerca, diventa semplice definire la background knowloedge e le etihette degli esempi di training.
+In particolar modo ci concentraremo sulle decisioni che sono state prese riguardo al representation language. Una volta che abbiamo deciso come vogliamo che il sistema ci spieghi il fatto su cui facciamo inferenza, cioè definito lo spazio di ricerca, diventa semplice definire la background knowledge e le etichette degli esempi di training.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gestione delle tracce}
-Un punto cruciale è stato definire come il sistema deve gestire stessi task in tracce diverse. Deve infatti essere consapevole che due task in tracce diverse che hanno lo stessi ID rappresentano la stessa implementazione con le stesse caratteristiche, ma non deve produrre una regola usando informazioni proveninti da tracce diverse.
+Un punto cruciale è stato definire come il sistema deve gestire stessi task in tracce diverse. Deve infatti essere consapevole che due task in tracce diverse che hanno lo stesso ID rappresentano la stessa implementazione con le stesse caratteristiche, ma non deve produrre una regola usando informazioni provenienti da tracce diverse.
 
-Prendiamo come esempio la Figura~\ref{fig:trace_management}; questa è portata solo come esempio e ha poco senso in uno scenario reale, visto che le due tracce sono identiche. Quello che volgiamo è che il sistema non unisca le informazioni relative a quello che succede al \textit{Task1} nella prima traccia con quello che succede allo stesso task nella seconda traccia. È però importante che sappia che il \textit{Task1} è sempre lo stesso in entrambe le tracce, anche se non conosce le carattersiche esplicite che il modello del sistema potrebbe fornirci.
+Prendiamo come esempio la Figura~\ref{fig:trace_management}; questa è portata solo come esempio e ha poco senso in uno scenario reale, visto che le due tracce sono identiche. Quello che vogliamo è che il sistema non unisca le informazioni relative a quello che succede al \textit{Task1} nella prima traccia con quello che succede allo stesso task nella seconda traccia. È però importante che sappia che il \textit{Task1} è sempre lo stesso in entrambe le tracce, anche se non conosce le caratteristiche esplicite che il modello del sistema potrebbe fornirci.
 \begin{wrapfigure}{L}{.6\textwidth}
     \centering
     \includegraphics[width=.7\linewidth]{images/2-analisi/trace_management.pdf}

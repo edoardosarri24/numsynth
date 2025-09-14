@@ -3,17 +3,18 @@ Dopo aver eseguito una prima fase di analisi nel Capitolo~\ref{cap:analisi}, ade
 
 \myskip
 
-Quando si esegue un esperimento è necessario, oltre ad avere a disposizione il file di log \textit{trace.log}, definire solo il representation bias. È stato infatti pensato uno script, che dorà essere modificato in base all'esperimento e trovarsi nella cartella, che legge il file di log e definisce i file tipici di Popper (e quindi di Numsynth) \textit{bk.pl} e \textit{exs.pl} necessarie per il sistema.
+Quando si esegue un esperimento è necessario, oltre ad avere a disposizione il file di log \textit{trace.log}, definire solo il representation bias. È stato infatti pensato uno script, che dovrà essere modificato in base all'esperimento e trovarsi nella cartella, che legge il file di log e definisce i file tipici di Popper (e quindi di Numsynth) \textit{bk.pl} e \textit{exs.pl} necessarie per il sistema.
 
-Una volta ch abbiamo definito una cartella per l'esperimento contenente un file \textit{bias.pl} e uno di log \textit{trace.log}, possiamo lancaire l'esperimento dalla root directory con \texttt{./numsynth.sh <folder-name>}.
+Una volta che abbiamo definito una cartella per l'esperimento contenente un file \textit{bias.pl} e uno di log \textit{trace.log}, possiamo lanciare l'esperimento dalla root directory con \texttt{./numsynth.sh <folder-name>}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Primo approccio}
-Il primo approccio tentato è stato il più semplice possibile: abbiamo inserito all'interno del representation bias solo quei predicati che rappresentano ciò che i log del simulatore di taskset mostra. Questi nello specifico sono: rilascio e completmento di un task; inizio e fine dell'esecuzione di un chunk. Nella cartella \textit{my-experiments} questo esperimento è \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/1-start}{start}.
+Il primo approccio tentato è stato il più semplice possibile: abbiamo inserito all'interno del representation bias solo quei predicati che rappresentano ciò che i log del simulatore di taskset mostra. Questi nello specifico sono: rilascio e completmento di un task; inizio e fine dell'esecuzione di un chunk. Nella cartella \textit{my-experiments} questo esperimento è \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/1-start/}{start}.
 
 In questo modo stiamo chiedendo al sistema di spiegarci il fallimento o il successo della traccia su cui facciamo inferenza solamente tramite questi predicati. Sarà poi Numsynth a cercare di trovare delle relazioni, anche numeriche, tra chunk e task per coprire il maggior numero di esempi positivi e non coprire nessuno di quelli positivi.
 
 \subsection{Modello}
+\label{subsec:mod-primo-approccio}
 Ogni traccia in questo esperimento ha una durata di massimo 100ms e sono state generate 100 tracce, di cui 76 hanno terminato con successo e 24 fallendo.
 
 \myskip
@@ -29,27 +30,63 @@ Volevamo ottenere un taskset che fosse facile da comprendere. Una traccia dovreb
 \subsection{Risultati}
 I risultati, che possiamo osservare nel file \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/1-start/result.txt}{result.txt}, mostrano la semplicità del modello scelto per questo esperimento.
 \begin{itemize}
-    \item Il tempo di addestramento è di circa 10s.
-    \item La precision e la recall sono entrambe massime e pari a 1.
-    \item La soluzione è composta da quattro letterali: \texttt{failure(A):- finish(A,F,C,B), \allowbreak mult(F,96,D),execute(A,D,C,B)}.
+    \item Il tempo di addestramento è di circa 25s.
+    \item La precision e la recall sono entrambe massime e pari a 1. Questo significa che sono stati coperti tutti gli esempi negativi e nessuno di quelli positivi.
+    \item La soluzione è composta da quattro letterali: \texttt{failure(A):- mult(E,100,F), \allowbreak finish(A,F,D,C),finish(A,E,D,C)}.
 \end{itemize}
 
 \myskip
 
-Il risultato mette in evidenza come una traccia ha successo se esiste un chunk che inizia a tempo \textit{D} e finisce a tempo \textit{F}, dove $D=F\cdot96$.
+La soluzione che il sistema ha trovato ci porta a dei ragionamenti che ne evidenziano le problematiche.
 
-Il problema di questo risultato, supponendo la sua correttezza, è il suo overfitting: non bagliando niente, probabilmente non riesce a generalizzare bene su tracce non viste.
+In primo luogo la generalizzazione è molto bassa. Il sistema ha trovato una regola che è il massimo dei True Positive (TP) e il massimo dei True Negative (TN); probabilmente su log più complessi questa regola non riuscirà a prevedere il fallimento della traccia in modo corretto.
 
-\subsection{Generalizzazione}
-Per capire se possiamo risolvere il problema dell'overfitting abbiamo eseguito lo stesso espeirmento allenando il sistema su più tracce, in qeusto caso 1000.
+Dalla regola appresa possiamo vedere come il sistema classifica una traccia come corretta in base alla sua lunghezza. Nello specifico infatti la traccia ha successo se esiste un chunk \textit{D.C} che termina la sua esecuzione sia al tempo \textit{E} che al tempo \textit{F}, dove $F=E\cdot100$. Siccome 100 è il massimo valore di una simulazione (i.e., il tempo massimo in una traccia), se una traccia fallisce allora sicuramente non arriva al tempo 100. Per confermare questo è stato fatto l'esperimento \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/2-start250/}{start250}, identico al precedente tranne che per la lunghezza delle tracce che è stata portata fino a 250ms. Tra le varie informazioni del file \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/1-start250/result.txt}{result.txt} possiamo osservare quanto previsto: la regola imparata è \texttt{failure(A):- finish(A,E,C,F),finish(A,B,C,F),mult(B,247,E)}, che ci conferma quanto ipotizzato.
 
-I risultati sono molto simili:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inversione dei positivi e negativi}
+Per cercare di impedire al sistema di utilizzare la lunghezza delle tracce come criterio per valutare la corretterzza di una traccia, sono stati invertiti gli esempi positivi e negativi, lasciando tutto il resto come descritto nella Sezione~\ref{subsec:mod-primo-approccio}, ed è stato così prodotto l'esperimento \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/3-posNeg-inversion}{posNeg-inversion}.
+
+In questo modo il sistema dovrà cercare di spiegare come mai una traccia fallisce e non perché ha successo; non dovrebbe quindi usare la lunghezza della traccia come parametro fondamentale, visto che il fallimento potrebbe avvenire all'inizio della traccia, ma anche un attimo prima del tempo massimo della simulazione.
+
+\subsection{Risultati}
+Il risultato di questo esperimento mostra come i predicati descritti fino a questo momento nel representation bias (i.e., il file \textit{bias.pl}) non sono sufficienti.
+
+Come si spiega nel paper~\cite{numsynth}, per ogni task di ricerca è predisposto un timer di 600s che permette al sistema di entrare in un loop. Questo timer in questo caso viene superato e la ricerca si arresta durante la ricerca di una soluzione con cinque letterali.
+
+\myskip
+
+La migliore soluzione trovata in questo esperimento ha quindi 4 letterali ed è \\ \texttt{failure(A):- execute(A,C,B,F),mult(C,56,E),finish(A,E,B,F)}. Il fatto che il sistema utilizzi ancora le moltiplicazioni per spiegare il fallimento (o successo) di una traccia è un chiaro segnale che il representation bias attuale non è sufficiente.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Without multiplications}
+\label{sec:wo-mult}
+Per cercare di evitare che il sistema utilizzi le moltiplicazioni per spiegare il fallimento o il successo di una traccia, gli è stat levata la possibilità di utilizzare le moltiplicazioni nell'esperimento \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/4-wo-mult/}{wo-mult}.
+
+Il modello utilizzato è sempre quello del primo esperimento descritto nella Sezione~\ref{subsec:mod-primo-approccio}. L'unica modifica che è stata portata è quella di eliminare le moltiplicazioni dal representation bias.
+
+\subsection{Risultati}
+La prima cosa interessante è notare come il sistema non abbia trovato una soluzione di dimensione quattro, cosa che invece succede nell'omonimo esperimento con la moltiplicazione come predicato utilizzabile.
+
+La seconda cosa che è chiara è che dopo un certo numero di letterali, il sistema non riesce a gestire l'elevata ricorsione.
+
+\myskip
+
+Il risultato finale, che possiamo osservare nel file \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/4-wo-mult/result.txt}{result.txt}, ci fornisce due spunti molto importanti:
 \begin{itemize}
-    \item Il tempo di addestramento è di circa 3m32s. Questo ci fa capire come la dimensione del dataset incide molto sui tempi di training.
-    \item La precsion e la recall sono sempre massime.
-    \item La solzione proposta è molto simile a quella precedente: \\ \texttt{failure(A):- finish(A,E,B,D), execute(A,F,B,D),mult(E,96,F)}
+    \item Senza moltiplicazioni non si si riesce a spiegare il fallimento con una regola che abbia sia un'alta precision che un'alta recall.
+    \item Senza predicati aggiuntivi, l'unico modo di spiegare il successo di una traccia in modo efficace (i.e., con un'alta precision e recall) è tramite la sua lunghezza.
 \end{itemize}
 
-\myskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Magic Popper}
+Come abbiamo detto nella Sezione~\ref{sec:numsynth}, Numsynth estende Popper con i predicati numerici. Oltre a questo permette anche di utilizzare le caratteristiche di MagicPopper~\cite{hocquette2023learning}, cioè permette di far si che in una soluzione non compaiano solamente valori presenti nella background knowledge, ma anche valori inventati.
 
-Possiamo trarre esattamente le stesse conclusioni anche per questo tipo di esempio.
+Da questa idea nasce l'esperimento \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/5-magic/}{magic}. La configurazione è esattamente la stessa di quello senza la moltiplicazione presentato nella Sezione~\ref{sec:wo-mult}; nel representation bias è stato aggiunto \texttt{magic\_value\_type(int)} che permette a Numsynth di inventare valori per il tipo intero, cioè per il tempo.
+
+\subsection{Risultati}
+I risultati sono esattamente quelli attesi. La regola trovata è \texttt{failure(A):- \\ release(A,95000,D),release(A,0,D)} e ci mostra quanto il sistema si basi sulla lunghezza delle regole per classificarle.
+
+Essa infatti ci dice che, perchè una traccia abbia successo, deve esistere un task \textit{D} che viene rilasciato sia al tempo 0 che al tempo 95000, che praticamente è quasi il tempo massimo che una traccia può durare (100ms).
+
+Ovviamente questo non è quanto vogliamo e ci dice ancora di più che i predicati attuali non sono sufficienti.

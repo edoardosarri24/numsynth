@@ -16,7 +16,7 @@ type(finish,(trace,int,task,chunk)).
 
 %%% direction %%%
 directions(failure,(in,)).
-directions(release,(in,in,out)). % out is who has released
+directions(release,(in,in,out)).
 directions(complete,(in,in,out)).
 directions(execute,(in,in,out,out)).
 directions(finish,(in,in,out,out)).

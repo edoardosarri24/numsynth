@@ -17,4 +17,4 @@ conda activate numsynth
 ```
 
 ### Experiments
-My experiments and the datail of my studies are in my [report.pdf](https://github.com/edoardosarri24/numsynth/blob/main/report.pdf) file.
+My experiments and the datail of my studies are in my [report.pdf](https://github.com/edoardosarri24/numsynth/report.pdf) file.

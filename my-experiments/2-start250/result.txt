@@ -1,0 +1,18 @@
+bk.pl sucessfully generated!!!
+exs.pl sucessfully generated!!!
+/Users/edoardosarri/Documents/numsynth/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+16:54:38 Num. pos examples: 43
+16:54:38 Num. neg examples: 57
+16:54:38 Searching programs of size: 3
+16:55:15 Searching programs of size: 4
+16:55:15 ********************
+16:55:15 New best hypothesis:
+16:55:15 tp:43 fn:0 size:4
+16:55:15 failure(A):- finish(A,E,C,F),mult(B,247,E),finish(A,B,C,F).
+16:55:15 ********************
+********** SOLUTION **********
+Precision:1.00 Recall:1.00 TP:43 FN:0 TN:57 FP:0 Size:4
+failure(A):- finish(A,E,C,F),finish(A,B,C,F),mult(B,247,E).
+******************************
+execution time: 0m37.079s

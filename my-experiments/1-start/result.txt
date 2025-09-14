@@ -2,17 +2,31 @@ bk.pl sucessfully generated!!!
 exs.pl sucessfully generated!!!
 /Users/edoardosarri/Documents/numsynth/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   import pkg_resources
-09:32:52 Num. pos examples: 76
-09:32:52 Num. neg examples: 24
-09:32:52 Searching programs of size: 3
-09:32:54 Searching programs of size: 4
-09:33:02 ********************
-09:33:02 New best hypothesis:
-09:33:02 tp:76 fn:0 size:4
-09:33:02 failure(A):- execute(A,D,C,B),finish(A,F,C,B),mult(F,96,D).
-09:33:02 ********************
+15:00:04 Num. pos examples: 76
+15:00:04 Num. neg examples: 24
+15:00:05 Searching programs of size: 3
+15:00:11 Searching programs of size: 4
+15:00:11 ********************
+15:00:11 New best hypothesis:
+15:00:11 tp:55 fn:21 size:8
+15:00:11 failure(A):- complete(A,E,D),mult(B,16,E),complete(A,B,D).
+15:00:11 failure(A):- complete(A,E,D),mult(B,30,E),complete(A,B,D).
+15:00:11 ********************
+15:00:16 ********************
+15:00:16 New best hypothesis:
+15:00:16 tp:55 fn:21 size:16
+15:00:16 failure(A):- complete(A,E,D),mult(B,16,E),complete(A,B,D).
+15:00:16 failure(A):- complete(A,E,D),mult(B,30,E),complete(A,B,D).
+15:00:16 failure(A):- release(A,E,D),mult(B,50,E),complete(A,B,D).
+15:00:16 failure(A):- release(A,E,D),mult(B,3,E),complete(A,B,D).
+15:00:16 ********************
+15:00:30 ********************
+15:00:30 New best hypothesis:
+15:00:30 tp:76 fn:0 size:4
+15:00:30 failure(A):- finish(A,E,D,C),finish(A,F,D,C),mult(E,100,F).
+15:00:30 ********************
 ********** SOLUTION **********
 Precision:1.00 Recall:1.00 TP:76 FN:0 TN:24 FP:0 Size:4
-failure(A):- finish(A,F,C,B),mult(F,96,D),execute(A,D,C,B).
+failure(A):- mult(E,100,F),finish(A,F,D,C),finish(A,E,D,C).
 ******************************
-execution time: 0m10.788s
+execution time: 0m25.883s

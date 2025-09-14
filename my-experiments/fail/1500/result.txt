@@ -1,0 +1,16 @@
+bk.pl sucessfully generated!!!
+exs.pl sucessfully generated!!!
+/Users/edoardosarri/Documents/numsynth/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+20:11:51 Num. pos examples: 1127
+20:11:51 Num. neg examples: 373
+20:11:51 Searching programs of size: 3
+20:11:51 ********************
+20:11:51 New best hypothesis:
+20:11:51 tp:1 fn:1126 size:3
+20:11:51 failure(A):- complete(A,C,B),release(A,C,B).
+20:11:51 ********************
+20:11:54 Searching programs of size: 4
+Thread 1 (main): foreign predicate read_term_from_atom/3 did not clear exception:
+	error(resource_error(stack),stack_overflow{choicepoints:1,depth:0,environments:1,globalused:759091,localused:3455,stack:[frame(0,system: $c_call_prolog,[])],stack_limit:1048576,trailused:24084})
+execution time: 0m50.204s
