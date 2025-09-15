@@ -1,0 +1,32 @@
+bias.pl sucessfully generated!!!
+bk.pl sucessfully generated!!!
+exs.pl sucessfully generated!!!
+/Users/edoardosarri/Documents/prediction-in-data-driven-system/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+12:29:17 Num. pos examples: 72
+12:29:17 Num. neg examples: 28
+12:29:18 Searching programs of size: 3
+12:29:18 ********************
+12:29:18 New best hypothesis:
+12:29:18 tp:1 fn:71 size:3
+12:29:18 failure(A):- complete_1(A,B),release_2(A,B).
+12:29:18 ********************
+12:29:25 Searching programs of size: 4
+12:29:25 ********************
+12:29:25 New best hypothesis:
+12:29:25 tp:1 fn:71 size:11
+12:29:25 failure(A):- complete_1(A,B),release_2(A,B).
+12:29:25 failure(A):- finish_1(A,B,C),mult(E,8,B),execute_1(A,E,C).
+12:29:25 failure(A):- finish_1(A,B,C),mult(E,47,B),execute_1(A,E,C).
+12:29:25 ********************
+12:29:32 ********************
+12:29:32 New best hypothesis:
+12:29:32 tp:72 fn:0 size:4
+12:29:32 failure(A):- execute_1(A,E,C),mult(B,99,E),finish_1(A,B,C).
+12:29:32 ********************
+********** SOLUTION **********
+Precision:1.00 Recall:1.00 TP:72 FN:0 TN:28 FP:0 Size:4
+failure(A):- execute_1(A,E,C),mult(B,99,E),finish_1(A,B,C).
+******************************
+execution time: 15s
+execution time: 601s

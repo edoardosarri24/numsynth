@@ -11,7 +11,7 @@ Un punto cruciale è stato definire come il sistema deve gestire stessi task in 
 Prendiamo come esempio la Figura~\ref{fig:trace_management}; questa è portata solo come esempio e ha poco senso in uno scenario reale, visto che le due tracce sono identiche. Quello che vogliamo è che il sistema non unisca le informazioni relative a quello che succede al \textit{Task1} nella prima traccia con quello che succede allo stesso task nella seconda traccia. È però importante che sappia che il \textit{Task1} è sempre lo stesso in entrambe le tracce, anche se non conosce le caratteristiche esplicite che il modello del sistema potrebbe fornirci.
 \begin{wrapfigure}{L}{.6\textwidth}
     \centering
-    \includegraphics[width=.7\linewidth]{images/2-analisi/trace_management.pdf}
+    \includegraphics[width=.6\linewidth]{images/2-analisi/trace_management.pdf}
     \caption{\raggedright Trace management example.}
     \label{fig:trace_management}
 \end{wrapfigure}
@@ -35,10 +35,8 @@ Siccome il sistema che genera le tracce mostra i tempi in millisecondi con tre c
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gestione dei task}
 \label{sec:gestione-task}
-Il nostro obiettivo è quello di fare inferenza su una traccia non solo per predirre il suo fallimento, ma anche di spiegarne il motivo, cioè di capire quale task è il responsabile di aver superato la sua deadline.
+Il nostro obiettivo è quello di fare inferenza su una traccia non vista non solo per predirre il suo fallimento, ma anche per spiegarne il motivo, cioè per capire quale task è il responsabile di aver superato la sua deadline.
 
-Con questa premessa diventa importate spiegare il fallimento di una traccia non solo sulla base degli eventi che definiscono la traccia, ma anche sulla basi del comportamento di task. Per questo motivo sono stati eseguiti degli esperimenti che utilizzano predicati che descrivono sia l'evento che il task che lo ha generato.
+Con questa premessa diventa importate spiegare il fallimento di una traccia non solo sulla base degli eventi che definiscono la traccia, ma anche sulla base del comportamento di task.
 
-\myskip
-
-Definire predicati che non descrivono solo l'evento ma anche il task permette inoltre di ridurre l'arietà degli stessi. In questo modo la complessità del problema diminuisce e lo spazio in cui ricercare una soluzione diventa più piccolo.
+Per realizzare questo sono stati fatti degli esperimenti che usano nel representation bias non sono predicati che descrivono un evento, ma che nel nome del predicato stesso contengono anche il task che ha generato quell'evento.
