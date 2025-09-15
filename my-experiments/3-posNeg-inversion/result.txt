@@ -1,20 +1,35 @@
 bk.pl sucessfully generated!!!
 exs.pl sucessfully generated!!!
-/Users/edoardosarri/Documents/numsynth/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/Users/edoardosarri/Documents/prediction-in-data-driven-system/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   import pkg_resources
-16:09:01 Num. pos examples: 24
-16:09:01 Num. neg examples: 76
-16:09:01 Searching programs of size: 3
-16:09:06 Searching programs of size: 4
-16:09:50 ********************
-16:09:50 New best hypothesis:
-16:09:50 tp:1 fn:23 size:4
-16:09:50 failure(A):- execute(A,C,B,F),finish(A,E,B,F),mult(C,56,E).
-16:09:50 ********************
-16:10:17 Searching programs of size: 5
-16:19:01 TIMEOUT OF 600 SECONDS EXCEEDED
+11:11:51 Num. pos examples: 28
+11:11:51 Num. neg examples: 72
+11:11:51 Searching programs of size: 3
+11:11:52 Searching programs of size: 4
+11:12:04 ********************
+11:12:04 New best hypothesis:
+11:12:04 tp:1 fn:27 size:4
+11:12:04 failure(A):- release(A,C,E),mult(B,50,C),complete(A,B,E).
+11:12:04 ********************
+11:12:12 ********************
+11:12:12 New best hypothesis:
+11:12:12 tp:1 fn:27 size:8
+11:12:12 failure(A):- mult(B,25,F),finish(A,B,C,D),execute(A,F,C,D).
+11:12:12 failure(A):- release(A,C,E),mult(B,50,C),complete(A,B,E).
+11:12:12 ********************
+11:12:41 Searching programs of size: 5
+11:12:43 ********************
+11:12:43 New best hypothesis:
+11:12:43 tp:2 fn:26 size:13
+11:12:43 failure(A):- mult(B,25,F),finish(A,B,C,D),execute(A,F,C,D).
+11:12:43 failure(A):- release(A,C,E),mult(B,50,C),complete(A,B,E).
+11:12:43 failure(A):- complete(D,F,B),release(A,C,E),complete(D,C,B),complete(A,F,E).
+11:12:43 ********************
+11:21:51 TIMEOUT OF 600 SECONDS EXCEEDED
 ********** SOLUTION **********
-Precision:1.00 Recall:0.04 TP:1 FN:23 TN:76 FP:0 Size:4
-failure(A):- execute(A,C,B,F),mult(C,56,E),finish(A,E,B,F).
+Precision:1.00 Recall:0.07 TP:2 FN:26 TN:72 FP:0 Size:13
+failure(A):- execute(A,F,C,D),finish(A,B,C,D),mult(B,25,F).
+failure(A):- release(A,C,E),mult(B,50,C),complete(A,B,E).
+failure(A):- complete(A,F,E),complete(D,C,B),release(A,C,E),complete(D,F,B).
 ******************************
-execution time: 8m46.536s
+execution time: 601s

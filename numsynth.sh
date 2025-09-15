@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "execution..."
 cd my-experiments/$1
+rm -f bk.pl exs.pl result.txt
 ./script.py > result.txt 2>&1
 cd ../../
 start_time=$(date +%s)

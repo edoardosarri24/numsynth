@@ -1,11 +1,11 @@
 \chapter{Introduzione}
-Questo progetto è stato svolto durante la laurea magistrale in Ingegneria Informatica per il corso di Explainable Artificial Intelligence.
+Questo progetto è stato svolto durante la laurea magistrale in Ingegneria Informatica per il corso di \textit{Explainable Artificial Intelligence}.
 
-L'idea di \textit{Prediction in Data-Driven System} nasce dalla situazione in cui all'interno di un'azienda abbiamo un sistema di cui non è noto il modello, ma abbiamo solo il file di log generati dai task che definiscono questo sistema. Se abbiamo la necessità di valutare quale task potrebbe portare a dei problemi in questa esecuzione del sistema, non possiamo eseguire un'analisi statica dei task, ma l'unica soluzione è analizzare i dati che questi hanno prodotto.
+L'idea di \textit{Prediction in Data-Driven System} nasce dalla situazione in cui all'interno di un'azienda abbiamo un sistema di cui non è noto il modello, cioè non conosciamo i task che lo compongono e le loro caratteristiche, ma abbiamo solo i dati prodotti dal logging. In questo scenario, se abbiamo la necessità di valutare quale task potrebbe portare a dei problemi e quindi quale dovrebbe essere modificato, non possiamo fare un'analisi statica sul modello, ma possiamo solo considerare i dati.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Scenario}
-Nel nostro contesto specifico volevamo analizzare i dati prodotti da un sistema real-time, cioè un sistema i cui task devono dare garanzia di terminare entro una definita e nota deadline.
+Nel nostro contesto specifico volevamo analizzare i dati prodotti da un sistema real-time, cioè un sistema i cui task devono dare garanzia di terminare entro una definita e nota deadline. In questo scenario il fallimento di una traccia sarà quindi dovuto al superamento della deadline di un task che ancora non ha terminato uno dei suoi chunk.
 
 Essendo in uno scenario simulato, come prima cosa ci è servito un generatore di dati che ci fornisse il dataset su cui applicare le nostre idee. Questo progetto è in qualche modo collegato a un altro svolto in precedenza che ci fornisce un simulatore per lo scheduling di task real-time. Tale simulatore, presenza in nella repo del mio GitHub \href{https://github.com/edoardosarri24/real-time-scheduling-simulator}{real-time-scheduling-simulator}, è in grado di generare un dataset di tracce dato un modello di taskset e un algoritmo di scheduling.
 

@@ -12,7 +12,7 @@
 Se tengo 100 come massima durata e 1500 come numero di tracce allora va in errore. vedi fail/1500. come risolviamo questa cosa? ci potrebbe far comodo per la generalizzazione della regola.
 
 # analisi
-- fino all'exp5 si considera solo la lunghezza delle traccie. ci servono altri prediacti nel represntation bias.
+- quello che diceva sul trovare una regola base che spiega un caso semplice mi torna. nell'esperimento 1-start il motivo è noto (vedi report) però il problema è che fino all'exp5 si considera solo la lunghezza delle traccie: il motivo è noto ma non rappresentabile con i predicati attuali ci servono altri prediacti nel represntation bias.
 - forse invece che cercare di spiegare il successo di una traccia sarebbe più utili spiegarne il fallimento? in questo senso i *pos* sono quelli falliti e i *neg* sono quelli che hanno successo.
 - il motivo per cui speghiamo il fallimento è poi andare a lavorare sul task che lo ha causato. per questo motivo i predicati che spiegano i motivi dovrebbero essere relativi a uno specifico task/chunk (come suggeriva lei la modifica dei prodicati). in questo modo inoltre si mitiga il problema dell'overflow?
 - ci servono altri predicati.

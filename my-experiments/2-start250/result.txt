@@ -1,18 +1,18 @@
 bk.pl sucessfully generated!!!
 exs.pl sucessfully generated!!!
-/Users/edoardosarri/Documents/numsynth/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/Users/edoardosarri/Documents/prediction-in-data-driven-system/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   import pkg_resources
-16:54:38 Num. pos examples: 43
-16:54:38 Num. neg examples: 57
-16:54:38 Searching programs of size: 3
-16:55:15 Searching programs of size: 4
-16:55:15 ********************
-16:55:15 New best hypothesis:
-16:55:15 tp:43 fn:0 size:4
-16:55:15 failure(A):- finish(A,E,C,F),mult(B,247,E),finish(A,B,C,F).
-16:55:15 ********************
+11:10:11 Num. pos examples: 41
+11:10:11 Num. neg examples: 59
+11:10:11 Searching programs of size: 3
+11:10:46 Searching programs of size: 4
+11:10:46 ********************
+11:10:46 New best hypothesis:
+11:10:46 tp:41 fn:0 size:4
+11:10:46 failure(A):- mult(B,246,C),finish(A,B,E,D),execute(A,C,E,D).
+11:10:46 ********************
 ********** SOLUTION **********
-Precision:1.00 Recall:1.00 TP:43 FN:0 TN:57 FP:0 Size:4
-failure(A):- finish(A,E,C,F),finish(A,B,C,F),mult(B,247,E).
+Precision:1.00 Recall:1.00 TP:41 FN:0 TN:59 FP:0 Size:4
+failure(A):- finish(A,B,E,D),execute(A,C,E,D),mult(B,246,C).
 ******************************
-execution time: 0m37.079s
+execution time: 35s

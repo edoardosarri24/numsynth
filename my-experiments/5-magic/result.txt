@@ -1,17 +1,17 @@
 bk.pl sucessfully generated!!!
 exs.pl sucessfully generated!!!
-/Users/edoardosarri/Documents/numsynth/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/Users/edoardosarri/Documents/prediction-in-data-driven-system/numsynth/popper/tester.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   import pkg_resources
-17:32:12 Num. pos examples: 76
-17:32:12 Num. neg examples: 24
-17:32:13 Searching programs of size: 3
-17:32:13 ********************
-17:32:13 New best hypothesis:
-17:32:13 tp:76 fn:0 size:3
-17:32:13 failure(A):- release(A,0,D),release(A,95000,D).
-17:32:13 ********************
+11:30:19 Num. pos examples: 72
+11:30:19 Num. neg examples: 28
+11:30:19 Searching programs of size: 3
+11:30:19 ********************
+11:30:19 New best hypothesis:
+11:30:19 tp:72 fn:0 size:3
+11:30:19 failure(A):- release(A,0,D),release(A,95000,D).
+11:30:19 ********************
 ********** SOLUTION **********
-Precision:1.00 Recall:1.00 TP:76 FN:0 TN:24 FP:0 Size:3
+Precision:1.00 Recall:1.00 TP:72 FN:0 TN:28 FP:0 Size:3
 failure(A):- release(A,95000,D),release(A,0,D).
 ******************************
-execution time: 0m1.365s
+execution time: 0s

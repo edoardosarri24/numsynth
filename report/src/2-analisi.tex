@@ -31,3 +31,14 @@ Siccome Numsynth gestisce valori numerici sia di tipo \textit{int} che \textit{f
 Per semplificare l'addestramento è stato quindi deciso di rappresentare il tempo utilizzano \textit{int}.
 
 Siccome il sistema che genera le tracce mostra i tempi in millisecondi con tre cifre decimali, si è moltiplicato per $10^3$ il tempo mostrato. In questo modo è possibile usare tipi interi, ma si deve essere a conoscenza che il tempo va consdierando appunto in microsecondi.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Gestione dei task}
+\label{sec:gestione-task}
+Il nostro obiettivo è quello di fare inferenza su una traccia non solo per predirre il suo fallimento, ma anche di spiegarne il motivo, cioè di capire quale task è il responsabile di aver superato la sua deadline.
+
+Con questa premessa diventa importate spiegare il fallimento di una traccia non solo sulla base degli eventi che definiscono la traccia, ma anche sulla basi del comportamento di task. Per questo motivo sono stati eseguiti degli esperimenti che utilizzano predicati che descrivono sia l'evento che il task che lo ha generato.
+
+\myskip
+
+Definire predicati che non descrivono solo l'evento ma anche il task permette inoltre di ridurre l'arietà degli stessi. In questo modo la complessità del problema diminuisce e lo spazio in cui ricercare una soluzione diventa più piccolo.
