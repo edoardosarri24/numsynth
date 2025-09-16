@@ -94,22 +94,22 @@ Essa infatti ci dice che, perchè una traccia abbia successo, deve esistere un t
 Ovviamente questo non è quanto vogliamo e ci dice ancora di più che i predicati attuali non sono sufficienti.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Predicati event-task}
-\label{sec:event_task}
+\section{Predicati event-task-chunk}
+\label{sec:event_task_chunk}
 Adesso analiziamo quegli esperimenti che realizzano l'idea descritta nella Sezione~\ref{sec:gestione-task}: vogliamo spiegare il fallimento di una traccia correlando l'evento al task che ha provocato la deadline miss.
 
 Il modello utilizzato è ancora una volta quello base descritto nel primo esperimento nella Sezione~\ref{sec:primo-approccio}.
 
 \myskip
 
-Per lavorare sui predicati, è stato modificato lo script che genera i file \textit{bk.pl} e \textit{exs.pl}. Il risultato adesso è che per ogni predicato \texttt{body\_pred(event,3)} sono stati generati tanti predicati \texttt{body\_pred\_i(event,3)}, dove \texttt{i} è il numero del task; se abbiamo quindi un taskset con 5 task allora avremmo 5 nuovi predicati per ogni evento.
+Per lavorare sui predicati, è stato modificato lo script che genera i file \textit{bk.pl} e \textit{exs.pl}. Il risultato adesso è che per ogni predicato \texttt{body\_pred(event,3)} o \texttt{body\_pred(event,4)} sono stati generati tanti predicati \texttt{body\_pred\_taskID(event,2)} o \\ \texttt{body\_pred\_taskID\_chunkID(event,2)} quanti sono i task e chunk, dove le due variabili del predicato sono l'ID della traccia e il tempo in cui l'evento è stato generato.
 
 \subsection{Successo}
-Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/6-event-task/}{event-task} si è cercato di spiegare il motivo del successo di una traccia usando i predicati che descrivono sia l'evento che il task che lo ha generato.
+Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/6-event-task-chunk/}{event-task-chunk} si è cercato di spiegare il motivo del successo di una traccia usando i predicati che descrivono sia l'evento che il chunk (e il relativo task) che lo ha generato.
 
-I risultati sono stati deludenti per un motivo molto semplice: aggiungere il task che ha generato l'evento non impedisce al sistema di utilizzare la lunghezza della traccia per spiegare il suo successo. In realtà il risultato ottenuto è forse peggiore: la regola \texttt{failure(A):- execute\_1(A,E,C),mult(B,99,E),finish\_1(A,B,C)}, che ha precision e recall massime, attribuisce il successo di una futura traccia su cui faremo inferenza solamente al Task1, senza considerare minimamente gli altri. Oltre ad essere un caso esemplare di overfitting, ha anche poco senso.
+I risultati sono stati deludenti per un motivo molto semplice: aggiungere il task che ha generato l'evento non impedisce al sistema di utilizzare la lunghezza della traccia per spiegare il suo successo. In realtà il risultato ottenuto è forse peggiore: la regola \texttt{failure(A):- mult(B,99,C),finish\_1\_1(A,B),release\_1(A,C)}, che ha precision e recall massime, attribuisce il successo di una futura traccia su cui faremo inferenza solamente al Task1, considerando il suo rilascio e la fine dell'esezione di uno dei suoi chunk.
 
 \subsection{Fallimento}
 Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/7-event-task-inversion/}{event-task-inversion} si è invece cercato di spiegare il fallimento di una traccia usando i predicati che descrivono sia l'evento che il task che lo ha generato.
 
-Il risultato non è soddisfacente: se osserviamo il file \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/7-event-task-inversion/result.txt}{result.txt} vediamo chiaramente che la recall della soluzione è molto bassa, e questo vuol dire che il numero di esempi non coperti dalla regola è molto basso.
+Il risultato non è soddisfacente: se osserviamo il file \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/7-event-task-chunk-inversion/result.txt}{result.txt} vediamo chiaramente che la recall della soluzione è molto bassa, e questo vuol dire che il numero di esempi non coperti dalla regola è molto basso. Questo ci testimonia il fatto che con i predicati attuali non riusciamo a spiegare il fallimento di una traccia.

@@ -6,7 +6,7 @@ import time
 from collections import defaultdict
 
 import numpy as np
-import pkg_resources
+from importlib import resources
 from pyswip import Prolog
 from contextlib import contextmanager
 
@@ -50,7 +50,7 @@ class Tester():
 
         bk_pl_path = self.settings.bk_file
         exs_pl_path = self.settings.ex_file
-        test_pl_path = pkg_resources.resource_filename(__name__, "lp/test.pl")
+        test_pl_path = str(resources.files('popper').joinpath('lp/test.pl'))
 
         for x in [exs_pl_path, bk_pl_path, test_pl_path]:
             if os.name == 'nt':  # if on Windows, SWI requires escaped directory separators

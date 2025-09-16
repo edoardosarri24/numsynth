@@ -1,0 +1,127 @@
+bias.pl sucessfully generated!!!
+bk.pl sucessfully generated!!!
+exs.pl sucessfully generated!!!
+15:16:38 Num. pos examples: 81
+15:16:38 Num. neg examples: 19
+15:16:38 Searching programs of size: 3
+15:16:38 ********************
+15:16:38 New best hypothesis:
+15:16:38 tp:1 fn:80 size:3
+15:16:38 failure(A):- complete_1(A,B),release_2(A,B).
+15:16:38 ********************
+15:16:39 Searching programs of size: 4
+15:16:44 ********************
+15:16:44 New best hypothesis:
+15:16:44 tp:4 fn:77 size:23
+15:16:44 failure(A):- complete_1(A,B),release_2(A,B).
+15:16:44 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,38,B).
+15:16:44 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,98,B).
+15:16:44 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,53,B).
+15:16:44 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,89,B).
+15:16:44 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,62,B).
+15:16:44 ********************
+15:16:47 ********************
+15:16:47 New best hypothesis:
+15:16:47 tp:5 fn:76 size:27
+15:16:47 failure(A):- complete_1(A,B),release_2(A,B).
+15:16:47 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,38,B).
+15:16:47 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,98,B).
+15:16:47 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,53,B).
+15:16:47 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,89,B).
+15:16:47 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,62,B).
+15:16:47 failure(A):- complete_1(A,D),mult(D,4,B),complete_1(A,B).
+15:16:47 ********************
+15:16:56 ********************
+15:16:56 New best hypothesis:
+15:16:56 tp:6 fn:75 size:31
+15:16:56 failure(A):- complete_1(A,B),release_2(A,B).
+15:16:56 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,38,B).
+15:16:56 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,98,B).
+15:16:56 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,53,B).
+15:16:56 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,89,B).
+15:16:56 failure(A):- mult(D,12,B),complete_2(A,D),complete_1(A,B).
+15:16:56 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,62,B).
+15:16:56 failure(A):- complete_1(A,D),mult(D,4,B),complete_1(A,B).
+15:16:56 ********************
+15:17:12 ********************
+15:17:12 New best hypothesis:
+15:17:12 tp:9 fn:72 size:39
+15:17:12 failure(A):- complete_1(A,B),release_2(A,B).
+15:17:12 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,38,B).
+15:17:12 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,98,B).
+15:17:12 failure(A):- mult(B,8,D),finish_1_1(A,D),complete_1(A,B).
+15:17:12 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,89,B).
+15:17:12 failure(A):- mult(B,10,D),finish_1_1(A,D),complete_1(A,B).
+15:17:12 failure(A):- mult(B,40,D),finish_1_1(A,D),complete_1(A,B).
+15:17:12 failure(A):- mult(D,12,B),complete_2(A,D),complete_1(A,B).
+15:17:12 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,62,B).
+15:17:12 failure(A):- complete_1(A,D),mult(D,4,B),complete_1(A,B).
+15:17:12 ********************
+15:17:14 ********************
+15:17:14 New best hypothesis:
+15:17:14 tp:10 fn:71 size:43
+15:17:14 failure(A):- complete_1(A,B),release_2(A,B).
+15:17:14 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,38,B).
+15:17:14 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,98,B).
+15:17:14 failure(A):- mult(B,8,D),finish_1_1(A,D),complete_1(A,B).
+15:17:14 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,89,B).
+15:17:14 failure(A):- complete_1(A,B),mult(B,4,D),release_2(A,D).
+15:17:14 failure(A):- mult(B,10,D),finish_1_1(A,D),complete_1(A,B).
+15:17:14 failure(A):- mult(B,40,D),finish_1_1(A,D),complete_1(A,B).
+15:17:14 failure(A):- mult(D,12,B),complete_2(A,D),complete_1(A,B).
+15:17:14 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,62,B).
+15:17:14 failure(A):- complete_1(A,D),mult(D,4,B),complete_1(A,B).
+15:17:14 ********************
+15:17:16 ********************
+15:17:16 New best hypothesis:
+15:17:16 tp:10 fn:71 size:47
+15:17:16 failure(A):- complete_1(A,B),release_2(A,B).
+15:17:16 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,38,B).
+15:17:16 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,98,B).
+15:17:16 failure(A):- mult(B,8,D),finish_1_1(A,D),complete_1(A,B).
+15:17:16 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,89,B).
+15:17:16 failure(A):- complete_1(A,B),mult(B,3,D),complete_2(A,D).
+15:17:16 failure(A):- complete_1(A,B),mult(B,4,D),release_2(A,D).
+15:17:16 failure(A):- mult(B,10,D),finish_1_1(A,D),complete_1(A,B).
+15:17:16 failure(A):- mult(B,40,D),finish_1_1(A,D),complete_1(A,B).
+15:17:16 failure(A):- mult(D,12,B),complete_2(A,D),complete_1(A,B).
+15:17:16 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,62,B).
+15:17:16 failure(A):- complete_1(A,D),mult(D,4,B),complete_1(A,B).
+15:17:16 ********************
+15:17:19 ********************
+15:17:19 New best hypothesis:
+15:17:19 tp:10 fn:71 size:51
+15:17:19 failure(A):- complete_1(A,B),release_2(A,B).
+15:17:19 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,38,B).
+15:17:19 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,98,B).
+15:17:19 failure(A):- execute_1_1(A,D),complete_1(A,B),mult(B,5,D).
+15:17:19 failure(A):- mult(B,8,D),finish_1_1(A,D),complete_1(A,B).
+15:17:19 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,89,B).
+15:17:19 failure(A):- complete_1(A,B),mult(B,3,D),complete_2(A,D).
+15:17:19 failure(A):- complete_1(A,B),mult(B,4,D),release_2(A,D).
+15:17:19 failure(A):- mult(B,10,D),finish_1_1(A,D),complete_1(A,B).
+15:17:19 failure(A):- mult(B,40,D),finish_1_1(A,D),complete_1(A,B).
+15:17:19 failure(A):- mult(D,12,B),complete_2(A,D),complete_1(A,B).
+15:17:19 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,62,B).
+15:17:19 failure(A):- complete_1(A,D),mult(D,4,B),complete_1(A,B).
+15:17:19 ********************
+15:17:41 ********************
+15:17:41 New best hypothesis:
+15:17:41 tp:64 fn:17 size:24
+15:17:41 failure(A):- execute_1_1(A,D),complete_1(A,B),mult(B,6,D).
+15:17:41 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,89,B).
+15:17:41 failure(A):- complete_1(A,B),mult(B,3,D),complete_2(A,D).
+15:17:41 failure(A):- release_1(A,C),execute_2_1(A,B),mult(B,18,C).
+15:17:41 failure(A):- execute_1_2(A,D),complete_1(A,B),mult(D,62,B).
+15:17:41 failure(A):- complete_1(A,D),mult(D,4,B),complete_1(A,B).
+15:17:41 ********************
+15:17:45 ********************
+15:17:45 New best hypothesis:
+15:17:45 tp:81 fn:0 size:4
+15:17:45 failure(A):- release_1(A,C),finish_1_1(A,B),mult(B,99,C).
+15:17:45 ********************
+********** SOLUTION **********
+Precision:1.00 Recall:1.00 TP:81 FN:0 TN:19 FP:0 Size:4
+failure(A):- mult(B,99,C),finish_1_1(A,B),release_1(A,C).
+******************************
+execution time: 67s

@@ -5,10 +5,12 @@ body_pred(release_1,2).
 body_pred(release_2,2).
 body_pred(complete_1,2).
 body_pred(complete_2,2).
-body_pred(execute_1,3).
-body_pred(execute_2,3).
-body_pred(finish_1,3).
-body_pred(finish_2,3).
+body_pred(execute_1_1,2).
+body_pred(execute_1_2,2).
+body_pred(execute_2_1,2).
+body_pred(finish_1_1,2).
+body_pred(finish_1_2,2).
+body_pred(finish_2_1,2).
 
 %%% type %%%
 % types help to reduce the training time
@@ -17,10 +19,12 @@ type(release_1,(trace,int)).
 type(release_2,(trace,int)).
 type(complete_1,(trace,int)).
 type(complete_2,(trace,int)).
-type(execute_1,(trace,int,chunk)).
-type(execute_2,(trace,int,chunk)).
-type(finish_1,(trace,int,chunk)).
-type(finish_2,(trace,int,chunk)).
+type(execute_1_1,(trace,int)).
+type(execute_1_2,(trace,int)).
+type(execute_2_1,(trace,int)).
+type(finish_1_1,(trace,int)).
+type(finish_1_2,(trace,int)).
+type(finish_2_1,(trace,int)).
 
 %%% direction %%%
 directions(failure,(in,)).
@@ -28,10 +32,12 @@ directions(release_1,(in,in)).
 directions(release_2,(in,in)).
 directions(complete_1,(in,in)).
 directions(complete_2,(in,in)).
-directions(execute_1,(in,in,out)).
-directions(execute_2,(in,in,out)).
-directions(finish_1,(in,in,out)).
-directions(finish_2,(in,in,out)).
+directions(execute_1_1,(in,in)).
+directions(execute_1_2,(in,in)).
+directions(execute_2_1,(in,in)).
+directions(finish_1_1,(in,in)).
+directions(finish_1_2,(in,in)).
+directions(finish_2_1,(in,in)).
 
 %%% numerical predicates %%%
 numerical_pred(geq,2).

@@ -3,23 +3,23 @@
 head_pred(failure,1).
 body_pred(release,2).
 body_pred(complete,2).
-body_pred(execute,3).
-body_pred(finish,3).
+body_pred(execute,2).
+body_pred(finish,2).
 
 %%% type %%%
 % types help to reduce the training time
 type(failure,(trace,)). % with unary predicate use che "," after the type.
 type(release,(trace,int)).
 type(complete,(trace,int)).
-type(execute,(trace,int,chunk)).
-type(finish,(trace,int,chunk)).
+type(execute,(trace,int)).
+type(finish,(trace,int)).
 
 %%% direction %%%
 directions(failure,(in,)).
 directions(release,(in,in)).
 directions(complete,(in,in)).
-directions(execute,(in,in,out)).
-directions(finish,(in,in,out)).
+directions(execute,(in,in)).
+directions(finish,(in,in)).
 
 %%% numerical predicates %%%
 numerical_pred(geq,2).

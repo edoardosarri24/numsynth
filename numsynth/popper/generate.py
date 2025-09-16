@@ -5,7 +5,6 @@ import clingo.script
 import numbers
 import itertools
 import operator
-import pkg_resources
 from .core import Literal, ConstVar
 from . util import format_rule, format_prog, rule_is_recursive, rule_is_invented
 from collections import defaultdict

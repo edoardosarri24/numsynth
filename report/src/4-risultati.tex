@@ -1,9 +1,12 @@
 \chapter{Risultati}
 In questo capitolo verrano riportati e riassunti i risultati descritti negli esperimenti del Capitolo~\ref{cap:esperimenti}. L'obiettivo è capire brevemente quali sono stati gli approcci tentati e i problemi riscontrati durante lo svolgimento del lavoro.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lunghezza tracce}
 In un primo momento sono stati inseriti all'interno del representation language, oltre ai predicati numerici di base che che Numsynth ci mette a disposizione, solamente i predicati che compaiono nei log (i.e., \textit{release}, \textit{complete}, \textit{execute} e \textit{finish}). In questo modo abbiamo visto, tramite gli esperimenti descritti dalla Sezione~\ref{sec:primo-approccio} alla Sezione~\ref{sec:magic-popper}, che il sistema tenta di spiegare il successo di una traccia solamente tramite la sua lunghezza.
 
 Anche tentando un approccio diverso come spiegare il fallimento invece che il successo, come fatto nella Sezione~\ref{sec:posNeg-inversion}, il risultato non è cambiato.
 
 Questo testimonia il fatto che i soli predicati usati non sono sufficienti al sistema per ottenere un risultato interessante. Infatti eliminando la possibilità di spiegare il successo tramite la moltiplicazione, cioè tramite il predicato \textit{mult}, il sistema non restituisce nessuna regola che abbia una buona accuracy.
+
+Questo risultato non cambia se, come fatto per gli esperimenti nelle Sezioni~\ref{sec:event_task_chunk}, aumentiamo introduciamo predicati che descrivono l'evento e l'ID del task e del chunk che hanno generato, lasciando solo la traccia e il tempo come variabile.

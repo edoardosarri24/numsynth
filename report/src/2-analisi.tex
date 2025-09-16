@@ -9,34 +9,36 @@ In particolar modo ci concentraremo sulle decisioni che sono state prese riguard
 Un punto cruciale è stato definire come il sistema deve gestire stessi task in tracce diverse. Deve infatti essere consapevole che due task in tracce diverse che hanno lo stesso ID rappresentano la stessa implementazione con le stesse caratteristiche, ma non deve produrre una regola usando informazioni provenienti da tracce diverse.
 
 Prendiamo come esempio la Figura~\ref{fig:trace_management}; questa è portata solo come esempio e ha poco senso in uno scenario reale, visto che le due tracce sono identiche. Quello che vogliamo è che il sistema non unisca le informazioni relative a quello che succede al \textit{Task1} nella prima traccia con quello che succede allo stesso task nella seconda traccia. È però importante che sappia che il \textit{Task1} è sempre lo stesso in entrambe le tracce, anche se non conosce le caratteristiche esplicite che il modello del sistema potrebbe fornirci.
-\begin{wrapfigure}{L}{.6\textwidth}
+\begin{wrapfigure}{L}{.5\textwidth}
     \centering
-    \includegraphics[width=.6\linewidth]{images/2-analisi/trace_management.pdf}
+    \includegraphics[width=.5\linewidth]{images/2-analisi/trace_management.pdf}
     \caption{\raggedright Trace management example.}
     \label{fig:trace_management}
 \end{wrapfigure}
 
 \myskip
 
-A livello implementativo questo si traduce aumentando di un'unità l'arietà di ogni prodicato, in modo da includere la traccia che ha generato quell'evento. Se ad esempio l'aerietà di \textit{release} sarebbe 2, tempo e taskl, questa diventa 3, tempo, task e traccia.
+A livello implementativo questo si traduce aumentando di un'unità l'arietà di ogni prodicato, in modo da includere la traccia in cui l'evento è stato generato. Se ad esempio l'aerietà di \textit{release} sarebbe 2, cioè se le sue variabili sono tempo e task, questa diventa 3, tempo, task e traccia.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gestione del tempo}
 Un altro aspetto che ha richiesto attenzione è la gestione del tempo.
 
-Siccome Numsynth gestisce valori numerici sia di tipo \textit{int} che \textit{float}~\cite{numsynth}, come prima idea potrebbe venire di utilizzare il tipo \textit{float} e prendere il tempo direttamente dal file di logging. Questo però comporterebbe avere un tempo di training più lungo, vista la complessità nella gestione dei tipi in virgola mobile.
+Siccome Numsynth gestisce valori numerici sia di tipo \textit{int} che \textit{float}~\cite{numsynth}, come prima idea potrebbe venire di utilizzare il tipo \textit{float} e prendere il tempo direttamente dal file di logging. Questo però comporterebbe avere una complessità maggiore e un tempo di training più lungo, vista la complessità nella gestione dei tipi in virgola mobile.
 
 \myskip
 
-Per semplificare l'addestramento è stato quindi deciso di rappresentare il tempo utilizzano \textit{int}.
-
-Siccome il sistema che genera le tracce mostra i tempi in millisecondi con tre cifre decimali, si è moltiplicato per $10^3$ il tempo mostrato. In questo modo è possibile usare tipi interi, ma si deve essere a conoscenza che il tempo va consdierando appunto in microsecondi.
+Per semplificare l'addestramento è stato quindi deciso di rappresentare il tempo utilizzando \textit{int}. Siccome il sistema che genera le tracce mostra i tempi in millisecondi con tre cifre decimali, si è moltiplicato per $10^3$ il tempo mostrato. In questo modo è possibile usare tipi interi, ma si deve essere a conoscenza che il tempo va considerato appunto in microsecondi.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gestione dei task}
 \label{sec:gestione-task}
 Il nostro obiettivo è quello di fare inferenza su una traccia non vista non solo per predirre il suo fallimento, ma anche per spiegarne il motivo, cioè per capire quale task è il responsabile di aver superato la sua deadline.
 
-Con questa premessa diventa importate spiegare il fallimento di una traccia non solo sulla base degli eventi che definiscono la traccia, ma anche sulla base del comportamento di task.
+Con questa premessa diventa importate spiegare il fallimento di una traccia non solo sulla base degli eventi che definiscono la traccia, ma anche sulla base del comportamento dei task e dei chunk.
 
-Per realizzare questo sono stati fatti degli esperimenti che usano nel representation bias non sono predicati che descrivono un evento, ma che nel nome del predicato stesso contengono anche il task che ha generato quell'evento.
+In questo modo non solo otteniamo una spiegazione sensata per i nostri requisiti, ma riduciamo anche la complessità del problema riducendo lo spazio di ricerca.
+
+\myskip
+
+A livello implementativo, quanto detto sopra si traduce definendo i predicati che esplicitano gli eventi in modo che contengano anche l'ID del task e del chunk che lo ha generato.

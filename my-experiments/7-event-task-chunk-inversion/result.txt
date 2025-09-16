@@ -1,0 +1,26 @@
+bias.pl sucessfully generated!!!
+bk.pl sucessfully generated!!!
+exs.pl sucessfully generated!!!
+15:20:34 Num. pos examples: 19
+15:20:34 Num. neg examples: 81
+15:20:34 Searching programs of size: 3
+15:20:36 Searching programs of size: 4
+15:21:12 ********************
+15:21:12 New best hypothesis:
+15:21:12 tp:0 fn:19 size:4
+15:21:12 failure(A):- mult(D,3,C),release_1(A,C),finish_1_2(A,D).
+15:21:12 ********************
+15:24:02 ********************
+15:24:02 New best hypothesis:
+15:24:02 tp:1 fn:18 size:8
+15:24:02 failure(A):- mult(D,3,C),release_1(A,C),finish_1_2(A,D).
+15:24:02 failure(A):- mult(D,23,B),complete_1(A,B),execute_1_2(A,D).
+15:24:02 ********************
+15:25:37 Searching programs of size: 5
+15:30:34 TIMEOUT OF 600 SECONDS EXCEEDED
+********** SOLUTION **********
+Precision:1.00 Recall:0.05 TP:1 FN:18 TN:81 FP:0 Size:8
+failure(A):- mult(D,3,C),finish_1_2(A,D),release_1(A,C).
+failure(A):- complete_1(A,B),execute_1_2(A,D),mult(D,23,B).
+******************************
+execution time: 600s
