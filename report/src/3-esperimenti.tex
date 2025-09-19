@@ -27,8 +27,6 @@ Il modello usato per questo esperimento, essendo il primo, è stato semplice e f
     \item Task2: periodo 5ms; deadline relativa 5ms; chunk1 con execution time campionato da un ConstantSampler con parametro 1ms.
 \end{itemize}
 
-Volevamo ottenere un taskset che fosse facile da comprendere. Una traccia dovrebbe avere sempre successo tranne quando il secondo chunk del primo task (i.e., chunk1.2) campio un valore superiore a 1. Essendo sotto RM , in questo caso al task2 non rimarebbe abbastanza tempo per eseguire entro la propria deadline.
-
 \subsection{Risultati}
 I risultati, che possiamo osservare nel file \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/1-start/result.txt}{result.txt}, mostrano la semplicità del modello scelto per questo esperimento.
 \begin{itemize}
@@ -94,7 +92,7 @@ Essa infatti ci dice che, perchè una traccia abbia successo, deve esistere un t
 Ovviamente questo non è quanto vogliamo e ci dice ancora di più che i predicati attuali non sono sufficienti.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Predicati event-task-chunk}
+\section{Descrittività predicati}
 \label{sec:event_task_chunk}
 Adesso analiziamo quegli esperimenti che realizzano l'idea descritta nella Sezione~\ref{sec:gestione-task}: vogliamo spiegare il fallimento di una traccia correlando l'evento al task che ha provocato la deadline miss.
 
@@ -113,3 +111,47 @@ I risultati sono stati deludenti per un motivo molto semplice: aggiungere il tas
 Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/7-event-task-inversion/}{event-task-inversion} si è invece cercato di spiegare il fallimento di una traccia usando i predicati che descrivono sia l'evento che il task che lo ha generato.
 
 Il risultato non è soddisfacente: se osserviamo il file \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/7-event-task-chunk-inversion/result.txt}{result.txt} vediamo chiaramente che la recall della soluzione è molto bassa, e questo vuol dire che il numero di esempi non coperti dalla regola è molto basso. Questo ci testimonia il fatto che con i predicati attuali non riusciamo a spiegare il fallimento di una traccia.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tempi di esecuzione dei chunk}
+Fino a questo momento abbiamo capito che il sistema cerca di spiegare i successi tramite la lunghezza delle tracce e che con i predicati attuali non riusciamo a ottenere una spiegazione che abbia una buona copertura degli esempi.
+
+Da ora in poi eseguiremo gli esperimenti senza moltiplicazioni: non ci sono motivi infatti per cui il fallimento (ma anche il successo) di una traccia debba dipendere dal prodotto di tempi.
+
+Inoltre non considereremo più il successo di una traccia, ma cercheremo solo di spiegarne il fallimento. Per fare questo dobbiamo aggiugnere dei predicati che il sistema possa usare.
+
+\subsection{Modello}
+L'obiettivo in questo momento è cercare di capire se il sistema impara una regola corretta: ci serve un modello di taskset di cui sappiamo a priori il motivo del fallimento. Il taskset considerato ha le sequenti caratteristiche:
+\begin{itemize}
+    \item Task1: periodo e deadline di 2ms. Il primo chunk esegue sempre per 0.5ms, il secondo campiona 0.5ms con probabilità del 95\%, 1ms con probabilità complementare.
+    \item Task2: periodo e deadline di 4ms. L'unico chunk ha tempo di esecuzione di 2ms.
+\end{itemize}
+La normale esecuzione del taskset, cioè quella che non porta a fallimento è mostrata in Figura~\ref{fig:tasksetmodel}. In questo modo è chiaro che il taskset fallisce, a causa del Task2, quando il secondo chunk del primo task campiona un tempo di esecuzione di 1ms invece che di 0.5ms.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.75\textwidth]{images/3-esperimenti/tasksetmodel.pdf}
+    \caption{Normal execution of taskset.}
+    \label{fig:tasksetmodel}
+\end{figure}
+
+\subsection{Predicati}
+Per questo esperimento, oltre ad eliminare le moltiplicazioni come abbiamo detto sopra, sono stati aggiunti i predicati che modellano il tempo di esecuzione di ogni chunk. Questo dovrebbe permettere al sistema di capire come il tempo di esecuzione è responsabile del fallimento di una traccia.
+
+Per implementare questi predicati non è stato toccato il file di log ma è stato modificato lo script che genera \textit{bias.pl}, \textit{bk.pl} e \textit{exs.pl}.
+
+\subsection{Risultati}
+Per capire se quanto supposto funzionasse, in un primo momento sono state considerate solo 10 tracce, di cui 9 fallivano e 1 aveva successo. L'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/8-executionTime-10traces/}{executionTime-10traces} ha dato esattamente la soluzione che ci aspettavamo: \texttt{failure(A):- \\ executionTime\_1\_2(A,C),geq(C,501)}: questo ci dice esattamente che se il tempo di esecuzione del Chunk1.2 (i.e., il secondo del primo task) campiona un valore superiore di 0.5ms allora la traccia fallisce.
+
+\subsection{Complessità}
+La nostra idea funziona, ma dobbiamo testarla su un dataset di tracce maggiore.
+
+Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/9-executionTime-100traces/}{executionTime-100traces} sono state testate 100 tracce, di cui 18 falliscono e 82 hanno successo. In questo caso il sistema trova la soluzione \texttt{failure(A):- executionTime\_1\_2(A,C),geq(C,501).}, che è ancora esattamente quella attesa.
+
+Se però usiamo lo stesso numero di tracce, ma il numero di fallimenti, e quindi di esempi da spiegare, aumenta, allora il timeout scatta e non troviamo nessuna soluzione. Queste è infatti quello successo nelll'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/10-executionTime-100traces-morefailures/}{executionTime-100traces-morefailures}, dove sono le tracce che falliscono sono 27.
+
+L'ultimo esperimento ci fa invece capire che il sistema fallisce quando il numero di tracce da spiegare è troppo elevato. Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/11-executionTime-1000traces/}{executionTime-1000traces} sono state usate 1000 tracce, ma di cui solo 14 falliscono. In questo caso la soluzione \texttt{failure(A):- executionTime\_1\_2(A,C),geq(C,1000)} è esattamente quella attesa; il valore non è più 501 come negli esperimento con meno esempi, ma comunque corretta e giusta.
+
+\subsection{Isolamento predicati corretti}
+Vogliamo vedere adesso se il sistema riesci a isolare i predicati che davvero spiegano un fallimento anche se ne sono presenti altri non necessari. È stato aggiunto il predicato sulla preemption che un task può subire, esplicito nel file di log ma non incluso fino a questo momento.
+
+Il risultato dell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/12-preemption/}{preemption} mostra ancora \texttt{failure(A):- \\ geq(C,501),executionTime\_1\_2(A,C)}, esattamente la soluzione corretta.

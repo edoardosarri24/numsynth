@@ -64,7 +64,7 @@ def deduce_bk_cons(settings):
     with open('popper/lp/cons.pl') as f:
         cons = f.read()
 
-    bk = bk.replace('\+','not')
+    bk = bk.replace(r'\+','not')
 
     xs = deduce_bk_cons_aux(cons, prog, bias, bk)
     # for x in xs:

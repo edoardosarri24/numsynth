@@ -1,0 +1,49 @@
+@startuml
+robust "Chunk1.1" as uno
+robust "Chunk1.2" as due
+robust "Chunk2.1" as tre
+
+@-1
+uno is Idle
+due is Idle
+tre is Idle
+
+@0
+uno is Processing
+due is Idle
+tre is Idle
+
+@0.5
+uno is Idle
+due is Processing
+tre is Idle
+
+@1
+uno is Idle
+due is Idle
+tre is Processing
+
+@2
+uno is Processing
+due is Idle
+tre is Idle
+uno -> uno : deadline
+due -> due : deadline
+
+@2.5
+uno is Idle
+due is Processing
+tre is Idle
+
+@3
+uno is Idle
+due is Idle
+tre is Processing
+
+@4
+uno is Processing
+due is Idle
+tre is Idle
+tre -> tre : deadline
+
+@enduml
