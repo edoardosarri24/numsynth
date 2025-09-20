@@ -1,6 +1,6 @@
 \chapter{Esperimenti}
 \label{cap:esperimenti}
-Dopo aver eseguito una prima fase di analisi nel Capitolo~\ref{cap:analisi}, adesso andiamo a descrivere gli esperimenti e i risultati a cui questi portano. Di rilievo sarà la ì descrizione del representation bias.
+Dopo aver eseguito una prima fase di analisi nel Capitolo~\ref{cap:analisi}, adesso andiamo a descrivere gli esperimenti e i risultati a cui questi portano. Di rilievo sarà la descrizione del representation bias.
 
 \myskip
 
@@ -11,7 +11,7 @@ Una volta che abbiamo definito una cartella per l'esperimento contenente un file
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Primo approccio}
 \label{sec:primo-approccio}
-Il primo approccio tentato è stato il più semplice possibile: abbiamo inserito all'interno del representation bias solo quei predicati che rappresentano ciò che i log del simulatore di taskset mostra. Questi nello specifico sono: rilascio e completmento di un task; inizio e fine dell'esecuzione di un chunk. Nella cartella \textit{my-experiments} questo esperimento è \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/1-start/}{start}.
+Il primo approccio tentato è stato il più semplice possibile: abbiamo inserito all'interno del representation bias solo quei predicati che rappresentano ciò che i log del simulatore di taskset mostra. Questi nello specifico sono: rilascio e completamento di un task; inizio e fine dell'esecuzione di un chunk. Nella cartella \textit{my-experiments} questo esperimento è \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/1-start/}{start}.
 
 In questo modo stiamo chiedendo al sistema di spiegarci il fallimento o il successo della traccia su cui facciamo inferenza solamente tramite questi predicati. Sarà poi Numsynth a cercare di trovare delle relazioni, anche numeriche, tra chunk e task per coprire il maggior numero di esempi positivi e non coprire nessuno di quelli positivi.
 
@@ -21,7 +21,7 @@ Ogni traccia in questo esperimento ha una durata di massimo 100ms e sono state g
 
 \myskip
 
-Il modello usato per questo esperimento, essendo il primo, è stato semplice e forse banale. È stato usato Rate Monotonic (RM) come algorimto di scheduling e il taskset ha queste caratteristriche:
+Il modello usato per questo esperimento, essendo il primo, è stato semplice e forse banale. È stato usato Rate Monotonic (RM) come algoritmo di scheduling e il taskset ha queste caratteristiche:
 \begin{itemize}
     \item Task1: periodo 3ms; deadline relativa 3ms; chunk1 con execution time campionato da un ConstantSampler con parametro 1ms; chunk2 con execution time campionato da un UniformSampler con parametri 0.5ms e 1.1.
     \item Task2: periodo 5ms; deadline relativa 5ms; chunk1 con execution time campionato da un ConstantSampler con parametro 1ms.
@@ -60,7 +60,7 @@ Inoltre, come si spiega nel paper~\cite{numsynth}, per ogni task di ricerca è p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Without multiplications}
 \label{sec:wo-mult}
-Per cercare di evitare che il sistema utilizzi le moltiplicazioni per spiegare il fallimento o il successo di una traccia, gli è stat levata la possibilità di utilizzare le moltiplicazioni nell'esperimento \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/4-wo-mult/}{wo-mult}.
+Per cercare di evitare che il sistema utilizzi le moltiplicazioni per spiegare il fallimento o il successo di una traccia, gli è stata levata la possibilità di utilizzare le moltiplicazioni nell'esperimento \href{https://github.com/edoardosarri24/numsynth/tree/main/my-experiments/4-wo-mult/}{wo-mult}.
 
 Il modello utilizzato è sempre quello del primo esperimento descritto nella Sezione~\ref{subsec:mod-primo-approccio}. L'unica modifica che è stata portata è quella di eliminare le moltiplicazioni dal representation bias.
 
@@ -105,7 +105,7 @@ Per lavorare sui predicati, è stato modificato lo script che genera i file \tex
 \subsection{Successo}
 Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/6-event-task-chunk/}{event-task-chunk} si è cercato di spiegare il motivo del successo di una traccia usando i predicati che descrivono sia l'evento che il chunk (e il relativo task) che lo ha generato.
 
-I risultati sono stati deludenti per un motivo molto semplice: aggiungere il task che ha generato l'evento non impedisce al sistema di utilizzare la lunghezza della traccia per spiegare il suo successo. In realtà il risultato ottenuto è forse peggiore: la regola \texttt{failure(A):- mult(B,99,C),finish\_1\_1(A,B),release\_1(A,C)}, che ha precision e recall massime, attribuisce il successo di una futura traccia su cui faremo inferenza solamente al Task1, considerando il suo rilascio e la fine dell'esezione di uno dei suoi chunk.
+I risultati sono stati deludenti per un motivo molto semplice: aggiungere il task che ha generato l'evento non impedisce al sistema di utilizzare la lunghezza della traccia per spiegare il suo successo. In realtà il risultato ottenuto è forse peggiore: la regola \texttt{failure(A):- mult(B,99,C),finish\_1\_1(A,B),release\_1(A,C)}, che ha precision e recall massime, attribuisce il successo di una futura traccia su cui faremo inferenza solamente al Task1, considerando il suo rilascio e la fine dell'esecuzione di uno dei suoi chunk.
 
 \subsection{Fallimento}
 Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/7-event-task-inversion/}{event-task-inversion} si è invece cercato di spiegare il fallimento di una traccia usando i predicati che descrivono sia l'evento che il task che lo ha generato.
@@ -114,14 +114,15 @@ Il risultato non è soddisfacente: se osserviamo il file \href{https://github.co
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Tempi di esecuzione dei chunk}
+\label{sec:execution_time}
 Fino a questo momento abbiamo capito che il sistema cerca di spiegare i successi tramite la lunghezza delle tracce e che con i predicati attuali non riusciamo a ottenere una spiegazione che abbia una buona copertura degli esempi.
 
 Da ora in poi eseguiremo gli esperimenti senza moltiplicazioni: non ci sono motivi infatti per cui il fallimento (ma anche il successo) di una traccia debba dipendere dal prodotto di tempi.
 
-Inoltre non considereremo più il successo di una traccia, ma cercheremo solo di spiegarne il fallimento. Per fare questo dobbiamo aggiugnere dei predicati che il sistema possa usare.
+Inoltre non considereremo più il successo di una traccia, ma cercheremo solo di spiegarne il fallimento. Per fare questo dobbiamo aggiungere dei predicati che il sistema possa usare.
 
 \subsection{Modello}
-L'obiettivo in questo momento è cercare di capire se il sistema impara una regola corretta: ci serve un modello di taskset di cui sappiamo a priori il motivo del fallimento. Il taskset considerato ha le sequenti caratteristiche:
+L'obiettivo in questo momento è cercare di capire se il sistema impara una regola corretta: ci serve un modello di taskset di cui sappiamo a priori il motivo del fallimento. Il taskset considerato ha le seguenti caratteristiche:
 \begin{itemize}
     \item Task1: periodo e deadline di 2ms. Il primo chunk esegue sempre per 0.5ms, il secondo campiona 0.5ms con probabilità del 95\%, 1ms con probabilità complementare.
     \item Task2: periodo e deadline di 4ms. L'unico chunk ha tempo di esecuzione di 2ms.
@@ -147,11 +148,31 @@ La nostra idea funziona, ma dobbiamo testarla su un dataset di tracce maggiore.
 
 Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/9-executionTime-100traces/}{executionTime-100traces} sono state testate 100 tracce, di cui 18 falliscono e 82 hanno successo. In questo caso il sistema trova la soluzione \texttt{failure(A):- executionTime\_1\_2(A,C),geq(C,501).}, che è ancora esattamente quella attesa.
 
-Se però usiamo lo stesso numero di tracce, ma il numero di fallimenti, e quindi di esempi da spiegare, aumenta, allora il timeout scatta e non troviamo nessuna soluzione. Queste è infatti quello successo nelll'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/10-executionTime-100traces-morefailures/}{executionTime-100traces-morefailures}, dove sono le tracce che falliscono sono 27.
+Se però usiamo lo stesso numero di tracce, ma il numero di fallimenti, e quindi di esempi da spiegare, aumenta, allora il timeout scatta e non troviamo nessuna soluzione. Queste è infatti quello successo nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/10-executionTime-100traces-morefailures/}{executionTime-100traces-morefailures}, dove sono le tracce che falliscono sono 27.
 
 L'ultimo esperimento ci fa invece capire che il sistema fallisce quando il numero di tracce da spiegare è troppo elevato. Nell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/11-executionTime-1000traces/}{executionTime-1000traces} sono state usate 1000 tracce, ma di cui solo 14 falliscono. In questo caso la soluzione \texttt{failure(A):- executionTime\_1\_2(A,C),geq(C,1000)} è esattamente quella attesa; il valore non è più 501 come negli esperimento con meno esempi, ma comunque corretta e giusta.
 
 \subsection{Isolamento predicati corretti}
-Vogliamo vedere adesso se il sistema riesci a isolare i predicati che davvero spiegano un fallimento anche se ne sono presenti altri non necessari. È stato aggiunto il predicato sulla preemption che un task può subire, esplicito nel file di log ma non incluso fino a questo momento.
+\label{subsec:preempt}
+Vogliamo vedere adesso se il sistema riesce a isolare i predicati che davvero spiegano un fallimento anche se ne sono presenti altri non necessari. È stato aggiunto il predicato sulla preemption che un task può subire, esplicito nel file di log ma non incluso fino a questo momento.
 
 Il risultato dell'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/12-preemption/}{preemption} mostra ancora \texttt{failure(A):- \\ geq(C,501),executionTime\_1\_2(A,C)}, esattamente la soluzione corretta.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Motivazione ignota}
+\label{sec:unknown}
+A questo punto possiamo fare l'esperimento \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/13-unknown/}{unknown}, cioè l'esperimento di cui non conosciamo a priori la motivazione del fallimento delle tracce.
+
+\subsection{Definizione}
+Il modello scelto è semplice, in modo che possiamo valutare la soluzione del sistema. Il modello di taskset ha la seguente struttura:
+\begin{itemize}
+    \item Task1: periodo e deadline di 3ms. Il primo chunk esegue sempre per 1ms, il secondo campiona 0.5ms con probabilità del 99.9\% e 0.7ms con probabilità complementare.
+    \item Task2: periodo e deadline di 5ms. L'unico chunk ha tempo di esecuzione di 2ms.
+\end{itemize}
+
+Seguendo quanto appreso dagli esperimenti precedenti riguardo alla complessità che Numsynth può gestire, abbiamo generato 100 tracce ognuna della durata massima di 100ms. Solamente circa l'1\% di tracce termina con un fallimento, cioè abbiamo 8 tracce da spiegare.
+
+\subsection{Risultati}
+Come possiamo osservare da file di \href{https://github.com/edoardosarri24/prediction-in-data-driven-system/13-unknown/result.txt}{risultati}, il sistema non riesce a trovare una soluzione. Più nello specifico va in overflow a causa di una ricorsione troppo elevata, fermandosi a regole di lunghezza cinque.
+
+La motivazione più plausibile è che, come già osservato per gli esperimenti precedenti, i predicati che al momento sono stati forniti non siano sufficienti.

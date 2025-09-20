@@ -1,4 +1,5 @@
-# NUMSYNTH
+# Prediction in Data-Driven System
+*Prediction in Data-Driven Systems* focuses on scenarios where only log data is available and the system model is unknown. The goal is to predict whether an execution trace will fail and identify the task responsible.
 
 ### Installation
 - Requirements
@@ -16,5 +17,6 @@ conda activate numsynth
 ./numsynth.sh <folder-name>
 ```
 
-### Experiments
-My experiments and the datail of my studies are in my [report.pdf](https://github.com/edoardosarri24/numsynth/report.pdf) file.
+### Documentation
+- My experiments are in [my-experiments](https://github.com/edoardosarri24/prediction-in-data-driven-system/tree/main/my-experiments) directory.
+- The datail of my studies are in my [report.pdf](https://github.com/edoardosarri24/prediction-in-data-driven-system/blob/main/report.pdf) file.

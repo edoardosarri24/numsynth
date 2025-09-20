@@ -3,7 +3,7 @@ Questo progetto è stato svolto durante la laurea magistrale in Ingegneria Infor
 
 L'idea di \textit{Prediction in Data-Driven System} nasce dalla situazione in cui all'interno di un'azienda abbiamo un sistema di cui non è noto il modello, cioè non conosciamo i task che lo compongono e le loro caratteristiche, ma abbiamo solo i dati prodotti dal logging. In questo scenario, se abbiamo la necessità di valutare quale task potrebbe portare a dei problemi, e quindi quale dovrebbe essere modificato o studiato più approfonditamente, non possiamo fare un'analisi statica sul modello ma possiamo solo considerare i dati.
 
-Vorremmo avere un metodo che, dato uno storico di file di log, ci possa prevedere se una traccia di cui non conosciamo l'esito (e.g., la traccia di log attuale che il sistema ci fornisce) avrà un fallimento e da quale task questo fallimento sarà causato.
+Vorremmo avere un metodo che, dato uno storico di file di log, possa prevedere se una traccia di cui non conosciamo l'esito (e.g., la traccia di log attuale che il sistema ci fornisce) avrà un fallimento e da quale task questo fallimento sarà causato.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Scenario real-time}
@@ -16,17 +16,16 @@ Essendo in uno scenario simulato e non avendo un sistema reale, come prima cosa 
 \label{sec:numsynth}
 Per imparare la motivazione del possibile fallimento di una traccia è stato usato un ILP (Inductive Logic Programming) system.
 
-Questo ci permette di utilizzare la logica per definire una groundtruth e dei predicati, sulla base dei quali sarà spiegato il fallimento di una traccia.
-
-\subsection{Numsynth}
-Il tool utilizzato per eseguire il nostro studio è stato \href{https://github.com/celinehocquette/numsynth-aaai23}{Numsynth}. Si tratta di un'estensione di Popper che permette anche il ragionamento numerico. È stato deciso di utilizzare questo sistema per due motivi: essendo basato su Popper, ha dietro un sistema noto e solito; può eseguire valutazioni su valori numerici, cosa fondamentale visto che i file di log sono basati su tempi in cui accadono eventi; utilizza il Learning From Failure (LFE) che permette, nonostante la complessità del ragionamento numerico, di limitare lo spazio di ricerca della soluzione.
+Questo ci permette di utilizzare la logica per definire una groundtruth, e dei predicati per spiegare il fallimento di una traccia.
 
 \myskip
+
+Il tool utilizzato per eseguire il nostro studio è stato \href{https://github.com/celinehocquette/numsynth-aaai23}{Numsynth}. Si tratta di un'estensione di Popper che permette anche il ragionamento numerico. È stato deciso di utilizzare questo sistema per due motivi: essendo basato su Popper, ha dietro un sistema noto e solido; può eseguire valutazioni su valori numerici, cosa fondamentale visto che i file di log sono basati su tempi in cui accadono eventi; utilizza il Learning From Failure (LFE) che permette, nonostante la complessità del ragionamento numerico, di limitare lo spazio di ricerca della soluzione.
 
 Numsynth permette di specificare dei predicati che sono particolari e che ci potrebbero essere utili nel seguito:
 \begin{itemize}
     \item \texttt{direction(predicato,(dir1,dir2,...))}: \\
-        Permette di specificare quali valori devono essere noti e quali saranno restituiti dal predicato. Le direzioni possibili sono: \textit{in} definisce che il valore deve essere noto; \textit{out} definsice che il valore sarà restituito dal predicato.
+        Permette di specificare quali valori devono essere noti e quali saranno restituiti dal predicato. Le direzioni possibili sono: \textit{in} definisce che il valore deve essere noto, cioè già introdotto in precedenza nella regola; \textit{out} definisce che il valore sarà restituito dal predicato.
     \item \texttt{max\_vars(n)}: \\
         Definisce il vincolo sulla complessità delle regole, specificando il numero massimo di variabili che una regola può contenere.
     \item \texttt{max\_body(n)}: \\
@@ -34,5 +33,5 @@ Numsynth permette di specificare dei predicati che sono particolari e che ci pot
     \item \texttt{magic\_value\_type(type)}: \\
         Definisce il tipo di valori che il sistema può inventare. Solitamente infatti i valori (anche quelli numerici) che compaiono nella soluzione sono solo quelli presenti nella background knowledge.
     \item \texttt{bounds(predicato,arg\_pos,(min, max))}: \\
-        Definisce i limiti in cui ricercare un valore numerico. Serve per diminuire lo spazio di ricerca e la complessità del training.
+        Definisce i limiti in cui ricercare un valore numerico. Serve per diminuire lo spazio di ricerca e la complessità del training. Di default questo valore è 100.
 \end{itemize}
